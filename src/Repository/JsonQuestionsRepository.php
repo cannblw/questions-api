@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Domain\Question;
 
-const DATA_SOURCE_PATH = '../../dataSources/questions.json';
+const DATA_SOURCE_PATH = '../dataSources/questions.json';
 
 class JsonQuestionsRepository implements QuestionsRepository
 {
