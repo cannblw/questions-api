@@ -40,9 +40,9 @@ class CsvQuestionsRepository implements QuestionsRepository
             $question->text = $row[0];
             $question->createdAt = $row[1];
             $question->choices = [
-                $row[2],
-                $row[3],
-                $row[4],
+                ['text' => $row[2]],
+                ['text' => $row[3]],
+                ['text' => $row[4]],
             ];
 
             array_push($json, $question);
