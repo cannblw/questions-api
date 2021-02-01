@@ -23,7 +23,6 @@ class CsvQuestionsRepository implements QuestionsRepository
     public function load()
     {
         $fp = fopen(DATA_SOURCE_PATH, 'r');
-
         $key = fgetcsv($fp, "1024", ",");
 
         $json = array();
@@ -34,8 +33,6 @@ class CsvQuestionsRepository implements QuestionsRepository
 
         fclose($fp);
 
-        var_dump($json);
-
-        $this->questions = json_encode($json);
+        $this->questions = $json;
     }
 }
