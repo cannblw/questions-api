@@ -16,7 +16,7 @@ class QuestionsController extends AbstractController
         return $this->json([
             'message' => 'Get questions',
         ]);
-    } 
+    }
 
     /**
      * @Route("/questions", methods={"POST"})
@@ -26,5 +26,5 @@ class QuestionsController extends AbstractController
         return $this->json([
             'message' => 'Create question',
         ]);
-    } 
+    }
 }
