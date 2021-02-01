@@ -23,12 +23,24 @@ class CsvQuestionsRepository implements QuestionsRepository
     public function load()
     {
         $fp = fopen(DATA_SOURCE_PATH, 'r');
-        $key = fgetcsv($fp, "1024", ",");
 
-        $json = array();
+        // Ignore column titles
+        fgetcsv($fp, '1024', ',');
 
-        while ($row = fgetcsv($fp, "1024", ",")) {
-            $json[] = array_combine($key, $row);
+        $json = [];
+
+        while ($row = fgetcsv($fp, '1024', ',')) {
+            $question = new Question();
+
+            $question->text = $row[0];
+            $question->createdAt = $row[1];
+            $question->choices = [
+                $row[2],
+                $row[3],
+                $row[4],
+            ];
+
+            array_push($json, $question);
         }
 
         fclose($fp);
