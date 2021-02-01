@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Domain\Question;
 use App\Repository\QuestionsRepository;
+use App\Service\TranslationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,15 +21,23 @@ class QuestionsController extends AbstractController
     /**
      * @Route("/questions", methods={"GET"})
      */
-    public function getQuestions(QuestionsRepository $repository, Request $request): Response
-    {
+    public function getQuestions(
+        QuestionsRepository $repository,
+        TranslationService $translationService,
+        Request $request
+    ): Response {
         $params = $request->query->all();
 
         if (!isset($params['lang']) || !is_string($params['lang']) || strlen($params['lang']) != 2) {
             return $this->json(ERRORS['WRONG_LANG_FORMAT'], Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->json($repository->getQuestions());
+        $lang = $params['lang'];
+
+        $questions = $repository->getQuestions();
+        $translatedQuestions = $translationService->translateQuestions($questions, $lang);
+
+        return $this->json($translatedQuestions);
     }
 
     /**
