@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Domain\Question;
 use App\Repository\QuestionsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -25,10 +27,14 @@ class QuestionsController extends AbstractController
     /**
      * @Route("/questions", methods={"POST"})
      */
-    public function createQuestion(): Response
+    public function createQuestion(QuestionsRepository $repository, Request $request): Response
     {
-        return $this->json([
-            'message' => 'Create question',
-        ]);
+        $body = json_decode($request->getContent());
+        $question = Question::fromRequestBody($body);
+
+        $repository->addQuestion($question);
+        $questions = $repository->getQuestions();
+
+        return $this->json($questions);
     }
 }
