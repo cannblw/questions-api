@@ -2,7 +2,7 @@
 
 namespace App\Domain;
 
-class Question
+class Choice
 {
     public $text;
 }
