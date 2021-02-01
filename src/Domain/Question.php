@@ -11,9 +11,10 @@ class Question
     public static function fromRequestBody($body)
     {
         $question = new Question();
+        $dateTimeFormat = $_ENV['DATE_TIME_FORMAT'];
 
         $question->text = $body->text;
-        $question->createdAt = $body->createdAt;
+        $question->createdAt = date($dateTimeFormat);
         $question->choices = $body->choices;
 
         return $question;
