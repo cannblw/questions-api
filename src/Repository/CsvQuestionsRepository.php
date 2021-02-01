@@ -10,6 +10,11 @@ class CsvQuestionsRepository implements QuestionsRepository
 {
     private $questions = [];
 
+    public function __construct()
+    {
+        $this->load();
+    }
+
     public function getQuestions()
     {
         return $this->questions;
@@ -20,7 +25,7 @@ class CsvQuestionsRepository implements QuestionsRepository
         array_push($this->questions, $question);
     }
 
-    public function load()
+    private function load()
     {
         $fp = fopen(DATA_SOURCE_PATH, 'r');
 

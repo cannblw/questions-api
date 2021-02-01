@@ -10,6 +10,11 @@ class JsonQuestionsRepository implements QuestionsRepository
 {
     private $questions = [];
 
+    public function __construct()
+    {
+        $this->load();
+    }
+
     public function getQuestions()
     {
         return $this->questions;
@@ -20,7 +25,7 @@ class JsonQuestionsRepository implements QuestionsRepository
         array_push($this->questions, $question);
     }
 
-    public function load()
+    private function load()
     {
         $content = file_get_contents(DATA_SOURCE_PATH);
         $decoded_content = json_decode($content);

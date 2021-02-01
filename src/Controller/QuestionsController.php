@@ -17,11 +17,6 @@ const ERRORS = [
 
 class QuestionsController extends AbstractController
 {
-    public function __construct(QuestionsRepository $repository)
-    {
-        $repository->load();
-    }
-
     /**
      * @Route("/questions", methods={"GET"})
      */

@@ -8,5 +8,4 @@ interface QuestionsRepository
 {
     public function getQuestions();
     public function addQuestion(Question $question);
-    public function load();
 }
