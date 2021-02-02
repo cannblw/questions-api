@@ -11,7 +11,7 @@ class GoogleTranslationService implements TranslationService
     public function __construct()
     {
         $this->translator = new GoogleTranslate();
-        $this->translator->setSource('en');
+        $this->translator->setSource($_ENV['TRANSLATOR_SOURCE_LANG']);
     }
 
     public function translateQuestions($questions, $targetLanguage)
