@@ -58,8 +58,7 @@ class QuestionsController extends AbstractController
         $question = Question::fromRequestBody($body);
 
         $repository->addQuestion($question);
-        $questions = $repository->getQuestions();
 
-        return $this->json($questions);
+        return $this->json($question);
     }
 }
