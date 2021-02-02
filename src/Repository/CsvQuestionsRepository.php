@@ -8,24 +8,28 @@ use App\Domain\Question;
 class CsvQuestionsRepository implements QuestionsRepository
 {
     private $data_source_path = '../database/questions.csv';
-    private $questions = [];
-
-    public function __construct()
-    {
-        $this->load();
-    }
 
     public function getQuestions()
     {
-        return $this->questions;
+        return $this->readQuestions();
     }
 
     public function addQuestion(Question $question)
     {
-        array_push($this->questions, $question);
+        $fp = fopen($this->data_source_path, 'a');
+
+        fputcsv($fp, [
+            $question->text,
+            $question->createdAt,
+            $question->choices[0]->text,
+            $question->choices[1]->text,
+            $question->choices[2]->text,
+        ], ',');
+
+        fclose($fp);
     }
 
-    private function load()
+    private function readQuestions()
     {
         $fp = fopen($this->data_source_path, 'r');
 
@@ -59,6 +63,6 @@ class CsvQuestionsRepository implements QuestionsRepository
 
         fclose($fp);
 
-        $this->questions = $json;
+        return $json;
     }
 }
