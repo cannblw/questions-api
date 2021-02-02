@@ -6,7 +6,7 @@ use App\Domain\Question;
 
 class CsvQuestionsRepository implements QuestionsRepository
 {
-    private $data_source_path = '../dataSources/questions.csv';
+    private $data_source_path = '../database/questions.csv';
     private $questions = [];
 
     public function __construct()

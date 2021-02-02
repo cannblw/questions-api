@@ -6,7 +6,7 @@ use App\Domain\Question;
 
 class JsonQuestionsRepository implements QuestionsRepository
 {
-    private $data_source_path = '../dataSources/questions.json';
+    private $data_source_path = '../database/questions.json';
 
     public function getQuestions()
     {
