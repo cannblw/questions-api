@@ -4,10 +4,9 @@ namespace App\Repository;
 
 use App\Domain\Question;
 
-const DATA_SOURCE_PATH = '../dataSources/questions.json';
-
 class JsonQuestionsRepository implements QuestionsRepository
 {
+    private $data_source_path = '../dataSources/questions.json';
     private $questions = [];
 
     public function __construct()
@@ -27,7 +26,7 @@ class JsonQuestionsRepository implements QuestionsRepository
 
     private function load()
     {
-        $content = file_get_contents(DATA_SOURCE_PATH);
+        $content = file_get_contents($this->data_source_path);
         $decoded_content = json_decode($content);
 
         $this->questions = $decoded_content;

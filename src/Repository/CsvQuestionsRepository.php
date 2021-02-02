@@ -4,10 +4,9 @@ namespace App\Repository;
 
 use App\Domain\Question;
 
-const DATA_SOURCE_PATH = '../dataSources/questions.csv';
-
 class CsvQuestionsRepository implements QuestionsRepository
 {
+    private $data_source_path = '../dataSources/questions.csv';
     private $questions = [];
 
     public function __construct()
@@ -27,7 +26,7 @@ class CsvQuestionsRepository implements QuestionsRepository
 
     private function load()
     {
-        $fp = fopen(DATA_SOURCE_PATH, 'r');
+        $fp = fopen($this->data_source_path, 'r');
 
         // Ignore column titles
         fgetcsv($fp, '1024', ',');
