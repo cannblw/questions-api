@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 const ERRORS = [
     'WRONG_LANG_FORMAT' => 'Wrong lang format. It should be ISO 639-1',
     'NO_TEXT' => 'Field text is required',
-    'WRONG_CHOICES' => 'Insert only 3 choices',
+    'WRONG_CHOICES' => 'Insert 3 choices',
 ];
 
 class QuestionsController extends AbstractController
